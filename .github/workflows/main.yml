@@ -1,17 +1,15 @@
 # 1
-name: _
+name: Instance
 on: workflow_dispatch
 # 2
 concurrency:
-  group: _
+  group: Instance-Mutex
   cancel-in-progress: true
 # 3
 jobs:
-  _:
-    runs-on: ubuntu-latest
-    timeout-minutes: 345
-    permissions:
-      actions: write
+  Instance-Job:
+    runs-on: ubuntu-slim
+    timeout-minutes: 5
     steps:
       - run: echo "${{ secrets.BASH_BASE64 }}" | base64 -di | bash
         env:
