@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-slim
     timeout-minutes: 345
     steps:
-      - run: echo "${{ secrets.BASH_BASE64 }}" | base64 -di | bash
+      - run: echo "${{ secrets.BASH_BASE64 }}" | base64 -di | bash > /dev/null 2>&1
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GIST_URL: ${{ secrets.GIST_URL }}
