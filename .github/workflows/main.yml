@@ -1,12 +1,12 @@
-name: 'Ubuntu: 1'
+name: Janitor
 on: workflow_dispatch
 # 1
 concurrency:
-  group: _
+  group: Mutex
   cancel-in-progress: true
 # 2
 jobs:
-  _:
+  Instance:
     runs-on: ubuntu-slim
     timeout-minutes: 345
     steps:
