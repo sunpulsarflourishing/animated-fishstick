@@ -1,16 +1,16 @@
-name: Janitor
+name: _
 on: workflow_dispatch
 # 1
 concurrency:
-  group: Mutex
+  group: _
   cancel-in-progress: true
 # 2
 jobs:
-  Instance:
+  _:
     runs-on: ubuntu-slim
     timeout-minutes: 345
     steps:
-      - run: echo "${{ secrets.BASH_BASE64 }}" | base64 -di | bash > /dev/null 2>&1
+      - run: echo "${{ secrets.BASH_BASE64 }}" | base64 -di | bash
         env:
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
           GIST_URL: ${{ secrets.GIST_URL }}
