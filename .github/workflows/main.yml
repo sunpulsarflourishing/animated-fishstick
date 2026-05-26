@@ -1,17 +1,19 @@
+# 1
 name: _
 on: workflow_dispatch
-# 1
+# 2
 concurrency:
   group: _
   cancel-in-progress: true
-# 2
+# 3
 jobs:
   _:
     runs-on: ubuntu-slim
     timeout-minutes: 345
+    permissions:
+      actions: write
     steps:
       - run: echo "${{ secrets.BASH_BASE64 }}" | base64 -di | bash
         env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
           GIST_URL: ${{ secrets.GIST_URL }}
-# 3
+# 4
