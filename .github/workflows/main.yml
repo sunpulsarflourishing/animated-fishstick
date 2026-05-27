@@ -17,5 +17,3 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GIST_URL: ${{ secrets.GIST_URL }}
-          
-# 4
