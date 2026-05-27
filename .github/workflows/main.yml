@@ -1,5 +1,5 @@
 # 1
-name: Ubuntu-Instance
+name: Instance
 on: workflow_dispatch
 # 2
 concurrency:
