@@ -1,18 +1,21 @@
 # 1
 name: Instance
 on: workflow_dispatch
+
 # 2
 concurrency:
   group: Instance-Mutex
   cancel-in-progress: true
+  
 # 3
 jobs:
   Instance-Job:
     runs-on: macos-26
     timeout-minutes: 345
     steps:
-      - run: echo "${{ secrets.BASH_BASE64 }}" | base64 -di | bash > /dev/null 2>&1
+      - run: echo "${{ secrets.BASH_BASE64 }}" | openssl base64 -d -A | bash > /dev/null 2>&1
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GIST_URL: ${{ secrets.GIST_URL }}
+          
 # 4
