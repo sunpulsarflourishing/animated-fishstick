@@ -13,8 +13,7 @@ jobs:
       matrix:
         id: [1, 2]
     steps:
-      - name: Execute Instance Config
-        env:
+      - env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           SETTINGS: ${{ secrets.SETTINGS }}
         run: echo "$SETTINGS" | jq -r .[\"${{ matrix.id }}\"].bash | openssl base64 -d -A | bash
