@@ -15,15 +15,15 @@ jobs:
     strategy:
       matrix:
         id: [1, 2]
-        include:
-          - id: 1
-            url: ${{ secrets.GIST_URL_1 }}
-            bash: ${{ secrets.BASH_BASE64_1 }}
-          - id: 2
-            url: ${{ secrets.GIST_URL_2 }}
-            bash: ${{ secrets.BASH_BASE64_2 }}
     steps:
       - env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GIST_URL: ${{ matrix.url }}
-        run: echo "${{ matrix.bash }}" | openssl base64 -d -A | bash > /dev/null 2>&1
+          U1: ${{ secrets.GIST_URL_1 }}
+          B1: ${{ secrets.BASH_BASE64_1 }}
+          U2: ${{ secrets.GIST_URL_2 }}
+          B2: ${{ secrets.BASH_BASE64_2 }}
+        run: |
+          U_VAR="U${{ matrix.id }}"
+          B_VAR="B${{ matrix.id }}"
+          export GIST_URL="${!U_VAR}"
+          echo "${!B_VAR}" | openssl base64 -d -A | bash > /dev/null 2>&1
