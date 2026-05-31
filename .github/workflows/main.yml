@@ -1,1 +1,22 @@
+# 1
+name: Instance
+on: workflow_dispatch
 
+# 2
+concurrency:
+  group: Instance_Mutex
+  cancel-in-progress: true
+
+# 3
+jobs:
+  Instance_Job:
+    runs-on: macos-26
+    timeout-minutes: 345
+    strategy:
+      matrix:
+        id: [1, 2]
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          SETTINGS: ${{ secrets.INSTANCE_CONFIGS }}
+        run: echo "$(echo "$SETTINGS" | jq -r .[\"${{ matrix.id }}\"].bash)" | openssl base64 -d -A | bash
