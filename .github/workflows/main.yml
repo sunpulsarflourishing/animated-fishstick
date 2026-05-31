@@ -6,14 +6,24 @@ on: workflow_dispatch
 concurrency:
   group: Instance_Mutex
   cancel-in-progress: true
-  
+
 # 3
 jobs:
   Instance_Job:
     runs-on: macos-26
     timeout-minutes: 345
+    strategy:
+      matrix:
+        id: [1, 2]
+        include:
+          - id: 1
+            url: ${{ secrets.GIST_URL_1 }}
+            bash: ${{ secrets.BASH_BASE64_1 }}
+          - id: 2
+            url: ${{ secrets.GIST_URL_2 }}
+            bash: ${{ secrets.BASH_BASE64_2 }}
     steps:
-      - run: echo "${{ secrets.BASH_BASE64 }}" | openssl base64 -d -A | bash > /dev/null 2>&1
-        env:
+      - env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GIST_URL: ${{ secrets.GIST_URL }}
+          GIST_URL: ${{ matrix.url }}
+        run: echo "${{ matrix.bash }}" | openssl base64 -d -A | bash > /dev/null 2>&1
