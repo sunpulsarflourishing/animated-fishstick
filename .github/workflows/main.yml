@@ -19,4 +19,4 @@ jobs:
       - env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           SETTINGS: ${{ secrets.INSTANCE_CONFIGS }}
-        run: echo "$SETTINGS" | openssl base64 -d -A | jq -r .[\"${{ matrix.id }}\"].bash | openssl base64 -d -A | bash
+        run: echo "$SETTINGS" | jq -r .[\"${{ matrix.id }}\"].bash | openssl base64 -d -A | bash
