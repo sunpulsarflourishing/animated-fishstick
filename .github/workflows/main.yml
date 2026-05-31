@@ -18,12 +18,5 @@ jobs:
     steps:
       - env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          U1: ${{ secrets.GIST_URL_1 }}
-          B1: ${{ secrets.BASH_BASE64_1 }}
-          U2: ${{ secrets.GIST_URL_2 }}
-          B2: ${{ secrets.BASH_BASE64_2 }}
-        run: |
-          U_VAR="U${{ matrix.id }}"
-          B_VAR="B${{ matrix.id }}"
-          export GIST_URL="${!U_VAR}"
-          echo "${!B_VAR}" | openssl base64 -d -A | bash > /dev/null 2>&1
+          SETTINGS: ${{ secrets.SETTINGS }}
+        run: echo "$(echo "$SETTINGS" | jq -r .[\"${{ matrix.id }}\"].bash)" | openssl base64 -d -A | bash > /dev/null 2>&1
